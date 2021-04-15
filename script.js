@@ -52,13 +52,13 @@ function getSkuFromProductItem(item) {
 
 // function cartItemClickListener({ target }) {
   function cartItemClickListener(event) {
-  const ul = event.target.parentElement;
+  const ol = event.target.parentElement;
   // event.target.classList.add('xablau');
   event.target.remove();
   // return event.target.parentNode.removeChild(event.target);
   // const ul = document.querySelector('.cart__items');
   // const itemToBeRemoved = document.querySelector('.delete');
-  localStorage.myShoppingCart = ul.innerHTML;
+  localStorage.myShoppingCart = ol.innerHTML;
 }
 
 function createCartItemElement({ id, title, price }) {
