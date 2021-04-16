@@ -12,7 +12,6 @@ const fetchProduct = async (idItem) =>
     .then((response) => (response));
 
 const insertLoading = () => {
-  // const items = document.querySelector('.container');
   const span = document.createElement('span');
   span.className = 'loading';
   span.innerHTML = 'loading...';
@@ -75,17 +74,9 @@ const updateCartTotal = async () => {
   totalPrice.innerHTML = sum;
 };
 
-// function cartItemClickListener({ target }) {
-  async function cartItemClickListener(event) {
+async function cartItemClickListener(event) {
   const ol = event.target.parentElement;
-  // event.target.classList.add('xablau');
-  /* const totalPrice = await getTotalPrice();
-  const newPrice = totalPrice - extractPrice(event.target);
-  await setTotalPrice(newPrice); */
   event.target.remove();
-  // return event.target.parentNode.removeChild(event.target);
-  // const ul = document.querySelector('.cart__items');
-  // const itemToBeRemoved = document.querySelector('.delete');
   updateCartTotal();
   localStorage.myShoppingCart = ol.innerHTML;
 }
@@ -106,18 +97,12 @@ const getId = async (id) => {
   const cartItem = createCartItemElement(productFound);
   cartItems.appendChild(cartItem);
   updateCartTotal();
-  /* const totalPrice = await getTotalPrice();
-  const newPrice = totalPrice + extractPrice(cartItem);
-  await setTotalPrice(newPrice); */
-
   localStorage.myShoppingCart = cartItems.innerHTML;
 };
 
 const addShoppingCart = async () => {
-  // await appendProducts();
   const buttons = document.querySelectorAll('.item__add');
   buttons.forEach((button) => {
-    // const id = button.parentElement.firstElementChild.innerHTML;
     button.addEventListener('click', () => {
       const id = getSkuFromProductItem(button.parentElement);
       getId(id);
@@ -142,19 +127,10 @@ const emptyCart = async () => {
   btnEmptyCart.addEventListener('click', () => {
     cartItems.innerHTML = '';
     localStorage.myShoppingCart = '';
-    /* while (document.querySelector('.cart__item')) {
-      document.querySelector('.cart__item').remove();
-    } */
   });
-  // const cartItems = document.querySelector('.cart__items');
-  /* var elemento = document.getElementById("topo");
-  (cartItems.firstChild) {
-    cartItems.removeChild(cartItems.firstChild);
-  } */
 };
 
 window.onload = async function onload() { 
-  // insertLoading();
   await appendProducts();
   await loadShoppingCart();
   await addShoppingCart();
