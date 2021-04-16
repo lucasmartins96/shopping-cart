@@ -11,6 +11,18 @@ const fetchProduct = async (idItem) =>
     .then((response) => response.json())
     .then((response) => (response));
 
+const insertLoading = () => {
+  // const items = document.querySelector('.container');
+  const span = document.createElement('span');
+  span.className = 'loading';
+  span.innerHTML = 'loading...';
+  document.body.appendChild(span);
+};
+
+const removeLoading = () => {
+  document.querySelector('.loading').remove();
+};
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -38,7 +50,9 @@ function createProductItemElement({ id, title, thumbnail }) {
 }
 
 const appendProducts = async () => {
+  insertLoading();
   const resultsMercado = await verifiedFetch();
+  removeLoading();
   const sectionItems = document.querySelector('.items');
   resultsMercado.forEach((result) => {
     const productItemElement = createProductItemElement(result);
@@ -85,7 +99,9 @@ function createCartItemElement({ id, title, price }) {
 }
 
 const getId = async (id) => {
+  insertLoading();
   const productFound = await fetchProduct(id);
+  removeLoading();
   const cartItems = document.querySelector('.cart__items');
   const cartItem = createCartItemElement(productFound);
   cartItems.appendChild(cartItem);
@@ -138,6 +154,7 @@ const emptyCart = async () => {
 };
 
 window.onload = async function onload() { 
+  // insertLoading();
   await appendProducts();
   await loadShoppingCart();
   await addShoppingCart();
