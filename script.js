@@ -50,41 +50,29 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
-const getTotalPrice = async () => {
-  const totalPrice = document.querySelector('.total-price').innerHTML;
-  return Number(totalPrice);
+const updateCartTotal = async () => {
+  const cartItems = document.querySelectorAll('.cart__item');
+  const totalPrice = document.querySelector('.total-price');
+  let sum = 0;
+  cartItems.forEach((cartItem) => {
+    const extractedPrice = cartItem.innerText.split('$');
+    sum += Number(extractedPrice[1]);
+  });
+  totalPrice.innerHTML = sum;
 };
-
-const setTotalPrice = async (price) => {
-  if (price < 0) {
-    document.querySelector('.total-price').innerHTML = '0';
-  } else {
-    document.querySelector('.total-price').innerHTML = `${price}`;
-  }
-};
-
-const extractPrice = (cartItem) => {
-  // const extract = cartItem.innerText.match(/\$\d+\.?\d*/g);
-  const extractedPrice = cartItem.innerText.split('$');
-  return parseFloat(extractedPrice[1]);
-};
-
-/* const updateCartTotal = async () => {
-  const cartItems = 
-}; */
 
 // function cartItemClickListener({ target }) {
   async function cartItemClickListener(event) {
   const ol = event.target.parentElement;
   // event.target.classList.add('xablau');
-  const totalPrice = await getTotalPrice();
+  /* const totalPrice = await getTotalPrice();
   const newPrice = totalPrice - extractPrice(event.target);
-  await setTotalPrice(newPrice);
-
+  await setTotalPrice(newPrice); */
   event.target.remove();
   // return event.target.parentNode.removeChild(event.target);
   // const ul = document.querySelector('.cart__items');
   // const itemToBeRemoved = document.querySelector('.delete');
+  updateCartTotal();
   localStorage.myShoppingCart = ol.innerHTML;
 }
 
@@ -101,9 +89,11 @@ const getId = async (id) => {
   const cartItems = document.querySelector('.cart__items');
   const cartItem = createCartItemElement(productFound);
   cartItems.appendChild(cartItem);
-  const totalPrice = await getTotalPrice();
+  updateCartTotal();
+  /* const totalPrice = await getTotalPrice();
   const newPrice = totalPrice + extractPrice(cartItem);
-  await setTotalPrice(newPrice);
+  await setTotalPrice(newPrice); */
+
   localStorage.myShoppingCart = cartItems.innerHTML;
 };
 
