@@ -120,8 +120,26 @@ const loadShoppingCart = async () => {
   }
 };
 
+const emptyCart = async () => {
+  const btnEmptyCart = document.querySelector('.empty-cart');
+  const cartItems = document.getElementsByClassName('cart__items')[0];
+  btnEmptyCart.addEventListener('click', () => {
+    cartItems.innerHTML = '';
+    localStorage.myShoppingCart = '';
+    /* while (document.querySelector('.cart__item')) {
+      document.querySelector('.cart__item').remove();
+    } */
+  });
+  // const cartItems = document.querySelector('.cart__items');
+  /* var elemento = document.getElementById("topo");
+  (cartItems.firstChild) {
+    cartItems.removeChild(cartItems.firstChild);
+  } */
+};
+
 window.onload = async function onload() { 
   await appendProducts();
   await loadShoppingCart();
   await addShoppingCart();
+  await emptyCart();
 };
