@@ -63,6 +63,7 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+// Créditos ao colega Daniel Roberto que me orientou na construção da função abaixo
 const updateCartTotal = async () => {
   const cartItems = document.querySelectorAll('.cart__item');
   const totalPrice = document.querySelector('.total-price');
@@ -110,6 +111,7 @@ const addShoppingCart = async () => {
   });
 };
 
+// Créditos ao colega Daniel Roberto que me orientou na construção da função abaixo
 const loadShoppingCart = async () => {
   const cartItems = document.querySelector('.cart__items');
   if (localStorage.myShoppingCart) {
